@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8081/packages";
+const API_URL = "https://prasthanam-tour.onrender.com/packages";
 
 export const getPackages = () => axios.get(API_URL);
 

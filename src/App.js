@@ -7,12 +7,10 @@ import PackageDetail from "./pages/PackageDetail";
 import InquiryForm from "./pages/InquiryForm";
 import { ThemeProvider } from "./context/ThemeContext";
 import { useState } from "react";
-import PackageForm from "./components/PackageForm";
 
 function App() {
   const [showInquiry, setShowInquiry] = useState(false);
   const [selectedPkg, setSelectedPkg] = useState(null);
-  //const [showForm, setShowForm] = useState(false); // Add Package modal
 
   const handleInquiry = (pkg) => {
     setSelectedPkg(pkg || null);

@@ -1,21 +1,43 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import { ThemeContext } from "../context/ThemeContext";
-import ThemeToggle from "./ThemeToggle";
+import { FaSun, FaMoon } from "react-icons/fa";
 
-function Navbar() {
-    const { theme } = useContext(ThemeContext);
+function Navbar({ onInquiry, onAddPackage , isAdmin}) {
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     return (
-        <nav className={`shadow px-6 py-4 flex justify-between items-center ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}>
-            <Link to="/" className="text-xl font-bold text-blue-600 dark:text-blue-300">
-                Prasthanam Tours
-            </Link>
-            <div className="flex items-center gap-4">
-                <Link to="/inquiry" className="text-gray-700 dark:text-gray-200 hover:underline">
+        <nav className="dark:bg-gray-900 shadow-md px-6 py-3 flex items-center justify-between">
+            {/* Left side: Brand text */}
+            <div className="flex items-center space-x-2">
+                <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
+                    Prasthanam Tours
+                </span>
+            </div>
+
+            {/* Right side nav links */}
+            <div className="flex items-center space-x-4">
+                {/* Inquiry button */}
+                <button
+                    onClick={onInquiry}
+                    className="text-gray-700 dark:text-gray-300 hover:text-orange-500 font-medium"
+                >
                     Inquiry
-                </Link>
-                <ThemeToggle />
+                </button>
+
+                {/* Theme toggle */}
+                <button
+                    onClick={toggleTheme}
+                    className="flex items-center bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded"
+                >
+                    <span className="mr-2 text-gray-700 dark:text-gray-300">
+                        {theme === "dark" ? "Light" : "Dark"}
+                    </span>
+                    {theme === "dark" ? (
+                        <FaSun className="text-yellow-400" />
+                    ) : (
+                        <FaMoon className="text-blue-600" />
+                    )}
+                </button>
             </div>
         </nav>
     );

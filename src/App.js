@@ -12,25 +12,23 @@ import PackageForm from "./components/PackageForm";
 function App() {
   const [showInquiry, setShowInquiry] = useState(false);
   const [selectedPkg, setSelectedPkg] = useState(null);
-  const [showForm, setShowForm] = useState(false); // Add Package modal
+  //const [showForm, setShowForm] = useState(false); // Add Package modal
 
   const handleInquiry = (pkg) => {
     setSelectedPkg(pkg || null);
     setShowInquiry(true);
   };
 
-  const handleAddPackage = () => {
-    setShowForm(true);
-  };
+ 
 
   return (
     <ThemeProvider>
       <Router>
         <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
-          <Navbar onInquiry={() => handleInquiry(null)} onAddPackage={handleAddPackage} isAdmin={true}/>
+          <Navbar onInquiry={() => handleInquiry(null)}  isAdmin={true}/>
           <main className="flex-grow">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home onInquiry={() => handleInquiry(selectedPkg)} />} />
               <Route path="/package/:id" element={<PackageDetail />} />
             </Routes>
           </main>

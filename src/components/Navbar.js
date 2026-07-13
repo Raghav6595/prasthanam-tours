@@ -2,7 +2,13 @@ import React, { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { FaSun, FaMoon } from "react-icons/fa";
 
-function Navbar({ onInquiry, onAddPackage , isAdmin}) {
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import AdminLogin from "./AdminLogin";
+
+function Navbar({ onInquiry, onAddPackage }) {
+    const { isAdmin, logout } = useAuth();
+    const [showLogin, setShowLogin] = useState(false);
     const { theme, toggleTheme } = useContext(ThemeContext);
 
     return (
@@ -16,6 +22,25 @@ function Navbar({ onInquiry, onAddPackage , isAdmin}) {
 
             {/* Right side nav links */}
             <div className="flex items-center space-x-4">
+                {!isAdmin ? (
+
+                    <button
+                        onClick={() => setShowLogin(true)}
+                        className="text-gray-700 dark:text-gray-300 hover:text-orange-500 font-medium"
+                    >
+                        Admin
+                    </button>
+
+                ) : (
+
+                    <button
+                        onClick={logout}
+                        className="text-green-600 font-semibold"
+                    >
+                        Logout
+                    </button>
+
+                )}
                 {/* Inquiry button */}
                 <button
                     onClick={onInquiry}
@@ -39,6 +64,11 @@ function Navbar({ onInquiry, onAddPackage , isAdmin}) {
                     )}
                 </button>
             </div>
+            {showLogin && (
+                <AdminLogin
+                    onClose={() => setShowLogin(false)}
+                />
+            )}
         </nav>
     );
 }

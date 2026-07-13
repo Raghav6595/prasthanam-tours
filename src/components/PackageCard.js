@@ -53,10 +53,10 @@ function PackageCard({ pkg, onEdit, onDelete, onInquiry, isAdmin }) {
         {/* Pricing */}
         <div className="flex items-baseline space-x-2 mb-3">
           <span className="text-sm text-gray-500 line-through">
-            USD {pkg.originalPrice}
+            INR {pkg.originalPrice}
           </span>
           <span className="text-base font-semibold text-blue-600 dark:text-blue-400">
-            USD {pkg.discountedPrice} / Adult
+            INR {pkg.discountedPrice} / Adult
           </span>
         </div>
 

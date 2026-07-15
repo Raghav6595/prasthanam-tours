@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState ,useCallback } from "react";
 import { getPackages } from "../services/packageService";
 
 const PackageContext = createContext();
@@ -8,7 +8,7 @@ export function PackageProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchPackages = (forceRefresh = false) => {
+    const fetchPackages = useCallback((forceRefresh = false) => {
 
         if (!forceRefresh && packages.length > 0) {
             return;
@@ -26,12 +26,12 @@ export function PackageProvider({ children }) {
                 );
             })
             .finally(() => setLoading(false));
-    };
+    }, [packages.length]);
 
     // Fetch only once when app starts
     useEffect(() => {
         fetchPackages();
-    }, []);
+    }, [fetchPackages]);
 
     return (
         <PackageContext.Provider

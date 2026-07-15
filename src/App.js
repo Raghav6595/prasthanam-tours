@@ -9,6 +9,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { AuthProvider } from "./context/AuthContext";
 import { useState } from "react";
 import { PackageProvider } from "./context/PackageContext";
+import Packages from "./pages/Packages";
 
 function App() {
   const [showInquiry, setShowInquiry] = useState(false);
@@ -34,6 +35,10 @@ function App() {
                   <Route
                     path="/"
                     element={<Home onInquiry={() => handleInquiry(selectedPkg)} />}
+                  />
+                  <Route
+                    path="/packages"
+                    element={<Packages onInquiry={handleInquiry} />}
                   />
                   <Route path="/package/:id" element={<PackageDetail />} />
                 </Routes>

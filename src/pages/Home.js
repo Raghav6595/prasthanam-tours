@@ -4,6 +4,9 @@ import PackageForm from "../components/PackageForm";
 import PackageLoader from "../components/PackageLoader";
 import { getPackages, deletePackage } from "../services/packageService";
 import { useAuth } from "../context/AuthContext";
+import WhyChooseUs from "../components/WhyChooseUs";
+import PopularDestinations from "../components/PopularDestinations";
+import HowItWorks from "../components/HowItWorks";
 
 function Home({ onInquiry }) {
   const { isAdmin } = useAuth();
@@ -55,7 +58,12 @@ function Home({ onInquiry }) {
           Handpicked packages, seamless booking, and unforgettable experiences.
         </p>
       </div>
+      
+      <WhyChooseUs />
 
+      <PopularDestinations />
+
+      <HowItWorks />
       <div className="p-6">
         {/* Admin-only Add Button */}
         {isAdmin && (

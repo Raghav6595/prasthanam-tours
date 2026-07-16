@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState ,useCallback} from "react";
+import { useEffect, useRef, useState } from "react";
 import destinations from "../data/destinations";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -9,20 +9,21 @@ export default function PopularDestinations() {
     const timerRef = useRef(null);
 
     // Starts / Restarts Auto Slide
-    const startAutoSlide = useCallback(() => {
+    const startAutoSlide = () => {
         clearTimeout(timerRef.current);
 
         timerRef.current = setTimeout(() => {
             nextSlide();
         }, 3000);
         // eslint-disable-next-line
-    }, []);
+    };
 
     useEffect(() => {
         startAutoSlide();
 
         return () => clearTimeout(timerRef.current);
-    }, [currentIndex,startAutoSlide]);
+        // eslint-disable-next-line
+    }, [currentIndex]);
 
     const goToSlide = (index) => {
         setAnimate(false);

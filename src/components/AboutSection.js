@@ -20,14 +20,6 @@ export default function AboutSection() {
         className="absolute bottom-20 left-16 text-5xl text-pink-300/40 dark:text-pink-400/20 float-medium"
       />
 
-      <FaMapMarkedAlt
-        className="absolute top-24 right-16 text-6xl text-yellow-300/40 dark:text-yellow-400/20 float-fast"
-      />
-
-      <FaHeadset
-        className="absolute bottom-20 right-14 text-5xl text-orange-300/40 dark:text-orange-400/20 float-slow"
-      />
-
       {/* Hero Content */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">

@@ -5,6 +5,7 @@ import { FaSun, FaMoon } from "react-icons/fa";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import AdminLogin from "./AdminLogin";
+import { Link } from "react-router-dom";
 
 function Navbar({ onInquiry, onAddPackage }) {
     const { isAdmin, logout } = useAuth();
@@ -15,9 +16,13 @@ function Navbar({ onInquiry, onAddPackage }) {
         <nav className="dark:bg-gray-900 shadow-md px-6 py-3 flex items-center justify-between">
             {/* Left side: Brand text */}
             <div className="flex items-center space-x-2">
-                <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
-                    Prasthanam Tours
-                </span>
+                <Link
+                    to="/"
+                    className="flex items-center space-x-2 group"                >
+                    <span className="text-xl font-bold text-gray-800 dark:text-gray-100 group-hover:text-orange-500 transition-colors duration-300">
+                        Prasthanam Tours
+                    </span>
+                </Link>
             </div>
 
             {/* Right side nav links */}

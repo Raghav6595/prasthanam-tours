@@ -16,8 +16,8 @@ export default function AboutSection() {
         className="absolute top-16 left-12 text-6xl text-orange-300/40 dark:text-orange-400/20 float-slow"
       />
 
-      <FaSuitcaseRolling
-        className="absolute bottom-20 left-16 text-5xl text-pink-300/40 dark:text-pink-400/20 float-medium"
+      <FaMapMarkedAlt
+        className="absolute top-24 right-16 text-6xl text-yellow-300/40 dark:text-yellow-400/20 float-fast"
       />
 
       {/* Hero Content */}

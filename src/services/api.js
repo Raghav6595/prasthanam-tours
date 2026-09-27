@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://prasthanam-tour.onrender.com"
+    baseURL: "http://localhost:8081"
 });
 
 // Automatically attach JWT if available

@@ -1,15 +1,18 @@
-import React from "react";
+import  { lazy ,Suspense} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import PackageDetail from "./pages/PackageDetail";
 import InquiryForm from "./pages/InquiryForm";
 import { ThemeProvider } from "./context/ThemeContext";
 import { AuthProvider } from "./context/AuthContext";
 import { useState } from "react";
 import { PackageProvider } from "./context/PackageContext";
-import Packages from "./pages/Packages";
+
+
+const Packages = lazy(() => import('./pages/Packages'));
+const PackageDetail = lazy(() => import('./pages/PackageDetail'));
+
 
 function App() {
   const [showInquiry, setShowInquiry] = useState(false);
@@ -31,17 +34,27 @@ function App() {
               <Navbar onInquiry={() => handleInquiry(null)} />
 
               <main className="flex-grow">
-                <Routes>
-                  <Route
-                    path="/"
-                    element={<Home onInquiry={() => handleInquiry(selectedPkg)} />}
-                  />
-                  <Route
-                    path="/packages"
-                    element={<Packages onInquiry={handleInquiry} />}
-                  />
-                  <Route path="/package/:id" element={<PackageDetail />} />
-                </Routes>
+                <Suspense
+                  fallback={
+                    <div className="min-h-[60vh] flex items-center justify-center">
+                      <div className="text-lg font-medium">
+                        Loading...
+                      </div>
+                    </div>
+                  }
+                >
+                  <Routes>
+                    <Route
+                      path="/"
+                      element={<Home onInquiry={() => handleInquiry(selectedPkg)} />}
+                    />
+                    <Route
+                      path="/packages"
+                      element={<Packages onInquiry={handleInquiry} />}
+                    />
+                    <Route path="/package/:id" element={<PackageDetail />} />
+                  </Routes>
+                </Suspense>
               </main>
 
               <Footer />

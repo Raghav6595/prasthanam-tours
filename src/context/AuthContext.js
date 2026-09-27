@@ -3,40 +3,78 @@ import { createContext, useContext, useEffect, useState } from "react";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
-    const [token, setToken] = useState(null);
+  // Restore login state after page refresh
+  useEffect(() => {
+    const savedToken = localStorage.getItem("token");
+    const savedUser = localStorage.getItem("user");
 
-    useEffect(() => {
-        const savedToken = localStorage.getItem("adminToken");
-        if (savedToken) {
-            setToken(savedToken);
-        }
-    }, []);
+    if (savedToken) {
+      setToken(savedToken);
+    }
 
-    const login = (jwtToken) => {
-        localStorage.setItem("adminToken", jwtToken);
-        setToken(jwtToken);
+    if (savedUser) {
+      try {
+        setUser(JSON.parse(savedUser));
+      } catch (error) {
+        console.error("Failed to parse saved user:", error);
+
+        localStorage.removeItem("user");
+      }
+    }
+  }, []);
+
+  // data should be:
+  // {
+  //   token,
+  //   username,
+  //   role
+  // }
+  const login = (data) => {
+    const { token, username, role } = data;
+
+    const userData = {
+      username,
+      role,
     };
 
-    const logout = () => {
-        localStorage.removeItem("adminToken");
-        setToken(null);
-    };
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(userData));
 
-    return (
-        <AuthContext.Provider
-            value={{
-                token,
-                isAdmin: !!token,
-                login,
-                logout
-            }}
-        >
-            {children}
-        </AuthContext.Provider>
-    );
+    setToken(token);
+    setUser(userData);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    setToken(null);
+    setUser(null);
+  };
+
+  const isAuthenticated = !!token && !!user;
+
+  const isAdmin = user?.role === "ADMIN";
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        token,
+        isAuthenticated,
+        isAdmin,
+        login,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {
-    return useContext(AuthContext);
+  return useContext(AuthContext);
 }

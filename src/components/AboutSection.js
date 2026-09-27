@@ -142,18 +142,6 @@ export default function AboutSection() {
 
         </div>
 
-        {/* Scroll */}
-
-        <div className="mt-12 flex flex-col items-center">
-
-          <span className="text-gray-500 dark:text-gray-400">
-            Scroll to Explore
-          </span>
-
-          <FaChevronDown className="mt-2 text-orange-500 text-2xl animate-bounce" />
-
-        </div>
-
       </div>
 
     </section>

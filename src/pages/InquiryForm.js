@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+const adminNumber = '8770837247'
+
 function InquiryForm({ pkg, onClose }) {
     const [formData, setFormData] = useState({
         name: "",
@@ -35,7 +37,7 @@ function InquiryForm({ pkg, onClose }) {
         }
 
         // ✅ WhatsApp redirect (replace with your admin number in international format)
-        const adminNumber = "9425333190"; // Example: +91 India number
+        const adminNumber = adminNumber; // Example: +91 India number
         const whatsappMessage = `New inquiry!
     Name: ${formData.name}
     Phone: ${formData.phone}

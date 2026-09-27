@@ -37,7 +37,7 @@ function InquiryForm({ pkg, onClose }) {
         }
 
         // ✅ WhatsApp redirect (replace with your admin number in international format)
-        const adminNumber = adminNumber; // Example: +91 India number
+        
         const whatsappMessage = `New inquiry!
     Name: ${formData.name}
     Phone: ${formData.phone}

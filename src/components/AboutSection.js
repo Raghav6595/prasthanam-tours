@@ -3,7 +3,6 @@ import {
   FaMapMarkedAlt,
   FaHeadset,
   FaSuitcaseRolling,
-  FaChevronDown,
 } from "react-icons/fa";
 
 export default function AboutSection() {
